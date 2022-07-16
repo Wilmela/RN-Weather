@@ -14,11 +14,9 @@ const Home = () => {
   const [data, setData] = useState({});
   const [showInfo, setShowInfo] = useState(false);
 
-  const toDegC = (fe) => Math.round((fe - 32) / 1.8).toFixed();
-
   const fetchWeatherData = async () => {
     const res = await fetch(
-      `https://api.openweathermap.org/data/2.5/weather?q=${city}&unit=imperial&appid=${RN_APP_API_KEY}`
+      `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${RN_APP_API_KEY}`
     );
     const data = await res.json();
     setData(data);
@@ -51,18 +49,18 @@ const Home = () => {
             <City
               name={data?.name}
               country={data?.sys?.country}
-              temp={`${toDegC(data?.main?.temp)}˚C`}
+              temp={`${data?.main?.temp}˚C`}
               main={data?.weather?.map((w) => w.main)}
               description={data?.weather?.map((w) => w.description)}
             />
 
             <View style={styles.info}>
               <Info
-                value={`${toDegC(data?.main?.feels_like)}˚C`}
+                value={`${data?.main?.feels_like}˚C`}
                 title="Feels_like"
               />
               <Info value={`${data?.main?.humidity}%`} title="Humidity" />
-              <Info value={data?.main?.pressure} title="Pressure" />
+              <Info value={`${data?.main?.pressure}hPa`} title="Pressure" />
             </View>
           </>
         ) : (
