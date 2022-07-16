@@ -1,2 +1,2 @@
 # RN-Weather
-A weather app built with react native and openweatherapi.
+A weather app built with react native and openweathermap api.
